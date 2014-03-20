@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>2048 FF</title>
+    <style>   
+        table {
+            background-color: lightblue;
+        }
+
+        td {
+            background-color: #679B00;
+            width: 50px;
+            height: 50px;
+            font-size: x-large;
+        }
+
+        td._2 {
+            background-color: #86B22D;               
+        }
+
+        td._4 {
+                background-color: green;                
+        }
+    </style>
+
+</head>
+<body>
+    <script src="Engine.js"> </script>
+    <script>
+        var board = new Board();
+        board.updateUI = function () {
+            var table = document.getElementById('TableUI');
+            for (var r = 0, n = table.rows.length; r < n; r++) {
+                for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+                    table.rows[r].cells[c].innerHTML = this.getCellValue([r, c]);
+                    table.rows[r].cells[c].className = '_' + this.getCellValue([r, c]);
+                }
+            }
+        }
+    </script>
+   
+    <table id="TableUI" style="text-align: center;">
+        <tr>
+            <td />
+            <td />
+            <td />
+            <td />
+        </tr>
+        <tr>
+            <td/>
+            <td/>
+            <td />
+            <td />
+        </tr>
+        <tr>
+            <td />
+            <td/>
+            <td />
+            <td  />
+        </tr>
+        <tr>
+            <td />
+            <td />
+            <td  />
+            <td  />
+        </tr>
+    </table>
+
+    <script>
+        board.fillBoard();
+        board.updateUI();
+    </script>
+
+    <button type="button" style="width:100px" onclick="board.fillBoard(); board.updateUI();">Fill</button>
+    <br />
+    <button type="button" style="width:100px" onclick="board.MoveLeft(); board.updateUI();">&#8592;</button>
+    <button type="button" style="width:100px" onclick="board.MoveRight(); board.updateUI();">&#8594;</button>
+    <button type="button" style="width:100px" onclick="board.MoveUp(); board.updateUI();">&#8593;</button>
+    <button type="button" style="width:100px" onclick="board.MoveDown(); board.updateUI();">&#8595;</button>
+</body>
+</html>
