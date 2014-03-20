@@ -105,7 +105,20 @@
               		}
                 }
             }
-        }
+        };
+        
+        board.processKey = function(keyEvent)
+        {
+        	switch(keyEvent.keyCode)
+        	{
+        		case 37: this.DoLeft();	break;
+        		case 38: this.DoUp();	break;
+        		case 39: this.DoRight();	break;
+        		case 40: this.DoDown();	break;
+        	}
+        	
+        	board.updateUI();
+        };
     </script>
    
     <table id="TableUI" style="text-align: center;">
@@ -138,13 +151,8 @@
     <script>
         board.fillBoard();
         board.updateUI();
-    </script>
-
-    <button type="button" style="width:100px" onclick="board.fillBoard(); board.updateUI();">Fill</button>
-    <br />
-    <button type="button" style="width:100px" onclick="board.DoLeft(); board.updateUI();">&#8592;</button>
-    <button type="button" style="width:100px" onclick="board.DoRight(); board.updateUI();">&#8594;</button>
-    <button type="button" style="width:100px" onclick="board.DoUp(); board.updateUI();">&#8593;</button>
-    <button type="button" style="width:100px" onclick="board.DoDown(); board.updateUI();">&#8595;</button>
+        
+        document.addEventListener("keydown", function (event) { board.processKey(event) ; }, false);
+    </script>\
 </body>
 </html>
