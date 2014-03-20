@@ -44,25 +44,20 @@ Board.prototype.fillBoard = function () {
     this.setCellValue(this.LastInserted, Math.random() > 0.75 ? 4 : 2);
 };
 
-Board.prototype.IsBlocked = function()
-{
-	for(var x = 0 ; x < 4; x++)
-	{
-		for(var currentYIndex = 0; currentYIndex < 3; currentYIndex++)
-		{
-			if(this.isCellEmpty([x, currentYIndex]) || this.isCellEmpty([currentYIndex, x]))
-			{
-				return false;
-			}
-			
-			if(		(this.getCellValue([x, currentYIndex]) == this.getCellValue([x, currentYIndex +1])) || (this.getCellValue([currentYIndex, x]) == this.getCellValue([currentYIndex +1, x])))
-			{
-				return false;
-			}
-		}	
-	}
-	
-	return true;
+Board.prototype.IsBlocked = function () {
+    for (var x = 0 ; x < 4; x++) {
+        for (var currentYIndex = 0; currentYIndex < 3; currentYIndex++) {
+            if (this.isCellEmpty([x, currentYIndex]) || this.isCellEmpty([currentYIndex, x])) {
+                return false;
+            }
+
+            if ((this.getCellValue([x, currentYIndex]) == this.getCellValue([x, currentYIndex + 1])) || (this.getCellValue([currentYIndex, x]) == this.getCellValue([currentYIndex + 1, x]))) {
+                return false;
+            }
+        }
+    }
+
+    return true;
 };
 
 /**
