@@ -20,13 +20,18 @@ Board.prototype.clearCellValue= function(position)
     this.Content[position[0]][position[1]] = '';
 };
 
+Board.prototype.isCellEmpty= function(position)
+{
+    return this.Content[position[0]][position[1]] === '';
+};
+
 Board.prototype.setCellValue = function (position, value) {
     this.Content[position[0]][position[1]] = value;
 };
 
 Board.prototype.getEmptyCell = function () {
     var cell = this.getCell();
-    while (this.getCellValue(cell) !== '') {
+    while (!this.isCellEmpty(cell)) {
         cell = this.getCell();
     }
 
@@ -47,7 +52,7 @@ Board.prototype.MoveLeft = function() {
 		for(var currentYIndex = 0; currentYIndex < 3; currentYIndex++)
 		{
 			// check if currentYIndex is pointing to an empty cell.
-			if( this.getCellValue([x,currentYIndex]) === '')
+			if( this.isCellEmpty([x,currentYIndex]))
 			{
 				// find the next non-empty cell;
 				var nonEmptyYIndex = currentYIndex +1;
@@ -64,6 +69,106 @@ Board.prototype.MoveLeft = function() {
 			}
 		}
 	}
+};
+
+/**
+ * Merge object on left
+ */
+Board.prototype.MergeLeft = function() {
+	for(var x = 0 ; x < 4; x++)
+	{
+		for(var currentYIndex = 0; currentYIndex < 3; currentYIndex++)
+		{
+			// check if next cell is the same.
+			if( !this.isCellEmpty([x,currentYIndex]) && this.getCellValue([x, currentYIndex]) == this.getCellValue([x, currentYIndex +1]))
+			{
+				this.setCellValue([x,currentYIndex], 2 * this.getCellValue([x,currentYIndex]));
+				this.clearCellValue([x, currentYIndex +1]);
+			}
+		}
+	}
+};
+
+/**
+ * Merge object on Up
+ */
+Board.prototype.MergeUp = function() {
+	for(var y = 0 ; y < 4; y++)
+	{
+		for(var currentXIndex = 0; currentXIndex < 3; currentXIndex++)
+		{
+			// check if next cell is the same.
+			if( !this.isCellEmpty([currentXIndex, y]) && this.getCellValue([currentXIndex, y]) == this.getCellValue([currentXIndex + 1, y]))
+			{
+				this.setCellValue([currentXIndex, y], 2 * this.getCellValue([currentXIndex, y]));
+				this.clearCellValue([currentXIndex + 1, y]);
+			}
+		}
+	}
+};
+
+/**
+ * Merge object Down
+ */
+Board.prototype.MergeDown = function() {
+	for(var y = 0 ; y < 4; y++)
+	{
+		for(var currentXIndex = 3; currentXIndex > 0; currentXIndex--)
+		{
+			// check if next cell is the same.
+			if( !this.isCellEmpty([currentXIndex, y]) && this.getCellValue([currentXIndex, y]) == this.getCellValue([currentXIndex - 1, y]))
+			{
+				this.setCellValue([currentXIndex, y], 2 * this.getCellValue([currentXIndex, y]));
+				this.clearCellValue([currentXIndex - 1, y]);
+			}
+		}
+	}
+};
+
+/**
+ * Merge object on Right
+ */
+Board.prototype.MergeRight = function() {
+	for(var x = 0 ; x < 4; x++)
+	{
+		for(var currentYIndex = 3; currentYIndex > 0; currentYIndex--)
+		{
+			// check if next cell is the same.
+			if( !this.isCellEmpty([x,currentYIndex]) && this.getCellValue([x, currentYIndex]) == this.getCellValue([x, currentYIndex  - 1]))
+			{
+				this.setCellValue([x,currentYIndex], 2 * this.getCellValue([x,currentYIndex]));
+				this.clearCellValue([x, currentYIndex  - 1]);
+			}
+		}
+	}
+};
+
+Board.prototype.DoLeft  = function()
+{
+	this.MoveLeft();
+	this.MergeLeft();
+	this.MoveLeft();
+};
+
+Board.prototype.DoRight  = function()
+{
+	this.MoveRight();
+	this.MergeRight();
+	this.MoveRight();
+};
+
+Board.prototype.DoUp  = function()
+{
+	this.MoveUp();
+	this.MergeUp();
+	this.MoveUp();
+};
+
+Board.prototype.DoDown  = function()
+{
+	this.MoveDown();
+	this.MergeDown();
+	this.MoveDown();
 };
 
 /**
