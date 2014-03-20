@@ -1,4 +1,6 @@
-
+/**
+ * Board constructor
+ */
 function Board ()  {
     this.Content = [['', '', '', ''], ['', '', '', ''], ['', '', '', ''], ['', '', '', '']];
     this.LastInserted = [-1, -1];

@@ -2,89 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>2048 FF</title>
-    <style>   
-    
-    	.inserted{
-    -webkit-animation-name: scalex;
-    -webkit-animation-duration:3s;
-    -webkit-animation-iteration-count:infinite;
-    -webkit-animation-timing-function:ease-in-out;
-    -moz-animation-name: scale;
-    -moz-animation-duration:3s;
-    -moz-animation-iteration-count:infinite;
-    -moz-animation-timing-function:ease-in-out;
-}
-    
-    @-webkit-keyframes scalex{
-        from {-webkit-transform: scale(0.9);}
-        65% {-webkit-transform: scale(1.1);}
-        to {-webkit-transform: scale(0.9);}    
-    }
-        
-    @-moz-keyframes scale{
-        from {-moz-transform: scale(0.9);}
-        65% {-moz-transform: scale(1.1);}
-        to {-moz-transform: scale(0.9);}    
-    }
-    
-        table {
-            background-color: white ;
-        }
-
-        td {
-        	background-color: lightgrey; 
-            width: 50px;
-            height: 50px;
-            font-size: x-large;
-            -moz-border-radius: 5x;
-			-webkit-border-radius: 5px;
-        }
-
-		/* from http://www.colorschemer.com/schemes/viewscheme.php?id=10576 */
-        td._2 {
-            background-color: #39C0B3;               
-        }
-
-        td._4 {
-            background-color: #2AB0C5;                
-        }
-        
-        td._8 {
-            background-color: #227FB0;                
-        }
-        
-        td._16 {
-            background-color: #1F5AE8;                
-        }
-        
-        td._32 {
-            background-color: #274389;                
-        }
-        
-        td._64 {
-            background-color: #5C4399;                
-        }
-        
-        td._128 {
-            background-color: #6C2A6A;                
-        }
-        
-        td._256 {
-            background-color: #B32E37;                
-        }
-        
-        td._512 {
-            background-color: #EB403B;                
-        }
-        
-        td._1024 {
-            background-color: #E98931;                
-        }
-        
-        td._2048 {
-            background-color: #FBB735;                
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="Board.css">
 
 </head>
 <body>
@@ -96,31 +14,28 @@
             for (var r = 0, n = table.rows.length; r < n; r++) {
                 for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
                     table.rows[r].cells[c].innerHTML = this.getCellValue([r, c]);
-                    
+
                     table.rows[r].cells[c].className = '_' + this.getCellValue([r, c]);
-                    
-                    if(this.LastInserted[0] == r && this.LastInserted[1] == c)
-                    {
-                    	 table.rows[r].cells[c].className += ' inserted';
-              		}
+
+                    if (this.LastInserted[0] == r && this.LastInserted[1] == c) {
+                        table.rows[r].cells[c].className += ' inserted';
+                    }
                 }
             }
         };
-        
-        board.processKey = function(keyEvent)
-        {
-        	switch(keyEvent.keyCode)
-        	{
-        		case 37: this.DoLeft();	break;
-        		case 38: this.DoUp();	break;
-        		case 39: this.DoRight();	break;
-        		case 40: this.DoDown();	break;
-        	}
-        	
-        	board.updateUI();
+
+        board.processKey = function (keyEvent) {
+            switch (keyEvent.keyCode) {
+                case 37: this.DoLeft(); break;
+                case 38: this.DoUp(); break;
+                case 39: this.DoRight(); break;
+                case 40: this.DoDown(); break;
+            }
+
+            board.updateUI();
         };
     </script>
-   
+
     <table id="TableUI" style="text-align: center;">
         <tr>
             <td />
@@ -129,30 +44,30 @@
             <td />
         </tr>
         <tr>
-            <td/>
-            <td/>
+            <td />
+            <td />
             <td />
             <td />
         </tr>
         <tr>
             <td />
-            <td/>
             <td />
-            <td  />
+            <td />
+            <td />
         </tr>
         <tr>
             <td />
             <td />
-            <td  />
-            <td  />
+            <td />
+            <td />
         </tr>
     </table>
 
     <script>
         board.fillBoard();
         board.updateUI();
-        
-        document.addEventListener("keydown", function (event) { board.processKey(event) ; }, false);
+
+        document.addEventListener("keydown", function (event) { board.processKey(event); }, false);
     </script>
 </body>
 </html>

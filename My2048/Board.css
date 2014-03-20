@@ -1,0 +1,100 @@
+﻿
+/* blinking animation for inserted cell*/
+.inserted {
+    -webkit-animation-name: scalex;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-name: scale;
+    -moz-animation-duration: 3s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes scalex {
+    from {
+        -webkit-transform: scale(0.9);
+    }
+
+    65% {
+        -webkit-transform: scale(1.1);
+    }
+
+    to {
+        -webkit-transform: scale(0.9);
+    }
+}
+
+@-moz-keyframes scale {
+    from {
+        -moz-transform: scale(0.9);
+    }
+
+    65% {
+        -moz-transform: scale(1.1);
+    }
+
+    to {
+        -moz-transform: scale(0.9);
+    }
+}
+
+/* board color*/
+table {
+    background-color: white;
+}
+
+/* empty cell*/
+td {
+    background-color: lightgrey;
+    width: 50px;
+    height: 50px;
+    font-size: x-large;
+    -moz-border-radius: 5x;
+    -webkit-border-radius: 5px;
+}
+
+    /* from http://www.colorschemer.com/schemes/viewscheme.php?id=10576 */
+    td._2 {
+        background-color: #39C0B3;
+    }
+
+    td._4 {
+        background-color: #2AB0C5;
+    }
+
+    td._8 {
+        background-color: #227FB0;
+    }
+
+    td._16 {
+        background-color: #1F5AE8;
+    }
+
+    td._32 {
+        background-color: #274389;
+    }
+
+    td._64 {
+        background-color: #5C4399;
+    }
+
+    td._128 {
+        background-color: #6C2A6A;
+    }
+
+    td._256 {
+        background-color: #B32E37;
+    }
+
+    td._512 {
+        background-color: #EB403B;
+    }
+
+    td._1024 {
+        background-color: #E98931;
+    }
+
+    td._2048 {
+        background-color: #FBB735;
+    }
