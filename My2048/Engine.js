@@ -39,7 +39,7 @@ Board.prototype.fillBoard = function () {
 };
 
 /**
- * Move object to left to fill any hole.
+ * Move object to left to fill any hole but no Merge
  */
 Board.prototype.MoveLeft = function() {
 	for(var x = 0 ; x < 4; x++)
@@ -57,6 +57,91 @@ Board.prototype.MoveLeft = function() {
 				}
 			
 				if (nonEmptyYIndex != 4)
+				{
+					this.setCellValue([x,currentYIndex], this.getCellValue([x,nonEmptyYIndex]));
+					this.clearCellValue([x,nonEmptyYIndex]);
+				}
+			}
+		}
+	}
+};
+
+/**
+ * Move object to up to fill any hole but no Merge
+ */
+Board.prototype.MoveUp = function() {
+	for(var y = 0 ; y < 4; y++)
+	{
+		for(var currentXIndex = 0; currentXIndex < 3; currentXIndex++)
+		{
+			// check if currentYIndex is pointing to an empty cell.
+			if( this.getCellValue([currentXIndex, y]) === '')
+			{
+				// find the next non-empty cell;
+				var nonEmptyXIndex = currentXIndex +1;
+				while( nonEmptyXIndex < 4 && this.getCellValue([nonEmptyXIndex, y]) === '')
+				{
+					nonEmptyXIndex++;	
+				}
+			
+				if (nonEmptyXIndex != 4)
+				{
+					this.setCellValue([currentXIndex, y], this.getCellValue([nonEmptyXIndex, y]));
+					this.clearCellValue([nonEmptyXIndex, y]);
+				}
+			}
+		}
+	}
+};
+
+/**
+ * Move object to up to fill any hole but no Merge
+ */
+Board.prototype.MoveDown = function() {
+	for(var y = 0 ; y < 4; y++)
+	{
+		for(var currentXIndex = 3; currentXIndex > 0; currentXIndex--)
+		{
+			// check if currentYIndex is pointing to an empty cell.
+			if( this.getCellValue([currentXIndex, y]) === '')
+			{
+				// find the next non-empty cell;
+				var nonEmptyXIndex = currentXIndex  -1;
+				while( nonEmptyXIndex >= 0 && this.getCellValue([nonEmptyXIndex, y]) === '')
+				{
+					nonEmptyXIndex--;	
+				}
+			
+				if (nonEmptyXIndex >= 0)
+				{
+					this.setCellValue([currentXIndex, y], this.getCellValue([nonEmptyXIndex, y]));
+					this.clearCellValue([nonEmptyXIndex, y]);
+				}
+			}
+		}
+	}
+};
+
+
+/**
+ * Move object to right to fill any hole but no Merge
+ */
+Board.prototype.MoveRight = function() {
+	for(var x = 0 ; x < 4; x++)
+	{
+		for(var currentYIndex = 3; currentYIndex > 0; currentYIndex--)
+		{
+			// check if currentYIndex is pointing to an empty cell.
+			if( this.getCellValue([x,currentYIndex]) === '')
+			{
+				// find the next non-empty cell;
+				var nonEmptyYIndex = currentYIndex  - 1;
+				while( nonEmptyYIndex >= 0 && this.getCellValue([x,nonEmptyYIndex]) === '')
+				{
+					nonEmptyYIndex--;	
+				}
+			
+				if (nonEmptyYIndex >= 0)
 				{
 					this.setCellValue([x,currentYIndex], this.getCellValue([x,nonEmptyYIndex]));
 					this.clearCellValue([x,nonEmptyYIndex]);
