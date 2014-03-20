@@ -96,7 +96,7 @@ Board.prototype.MoveLeft = function() {
 		}
 	}
 	
-	return true;
+	return anyChange;
 };
 
 /**
@@ -341,5 +341,5 @@ Board.prototype.MoveRight = function() {
 		}
 	}
 	
-	return true;
+	return anyChange;
 };
