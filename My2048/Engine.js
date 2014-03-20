@@ -43,10 +43,34 @@ Board.prototype.fillBoard = function () {
     this.setCellValue(cell, Math.random() > 0.75 ? 4 : 2);
 };
 
+Board.prototype.IsBlocked = function()
+{
+	for(var x = 0 ; x < 4; x++)
+	{
+		for(var currentYIndex = 0; currentYIndex < 3; currentYIndex++)
+		{
+			if(this.isCellEmpty([x, currentYIndex]) || this.isCellEmpty([currentYIndex, x]))
+			{
+				return false;
+			}
+			
+			if(		(this.getCellValue([x, currentYIndex]) == this.getCellValue([x, currentYIndex +1])) || (this.getCellValue([currentYIndex, x]) == this.getCellValue([currentYIndex +1, x])))
+			{
+				return false;
+			}
+		}	
+	}
+	
+	return true;
+};
+
 /**
  * Move object to left to fill any hole but no Merge
  */
 Board.prototype.MoveLeft = function() {
+	
+	var anyChange = false;
+	
 	for(var x = 0 ; x < 4; x++)
 	{
 		for(var currentYIndex = 0; currentYIndex < 3; currentYIndex++)
@@ -65,10 +89,14 @@ Board.prototype.MoveLeft = function() {
 				{
 					this.setCellValue([x,currentYIndex], this.getCellValue([x,nonEmptyYIndex]));
 					this.clearCellValue([x,nonEmptyYIndex]);
+					
+					anyChange = true;
 				}
 			}
 		}
 	}
+	
+	return true;
 };
 
 /**
@@ -145,36 +173,78 @@ Board.prototype.MergeRight = function() {
 
 Board.prototype.DoLeft  = function()
 {
-	this.MoveLeft();
+	var anyChange = this.MoveLeft();
 	this.MergeLeft();
-	this.MoveLeft();
+	anyChange |= this.MoveLeft();
+	
+	if(anyChange)
+	{
+		this.fillBoard();
+	}
+	
+	if(this.IsBlocked())
+	{
+		alert('looossseer');	
+	}
 };
 
 Board.prototype.DoRight  = function()
 {
-	this.MoveRight();
+	var anyChange = this.MoveRight();
 	this.MergeRight();
-	this.MoveRight();
+	anyChange |= this.MoveRight();
+	
+	if(anyChange)
+	{
+		this.fillBoard();
+	}
+	
+	if(this.IsBlocked())
+	{
+		alert('looossseer');	
+	}
 };
 
 Board.prototype.DoUp  = function()
 {
-	this.MoveUp();
+	var anyChange = this.MoveUp();
 	this.MergeUp();
-	this.MoveUp();
+	 anyChange |= this.MoveUp();
+	 
+	if(anyChange)
+	{
+		this.fillBoard();
+	}
+	
+	if(this.IsBlocked())
+	{
+		alert('looossseer');	
+	}
 };
 
 Board.prototype.DoDown  = function()
 {
-	this.MoveDown();
+	var anyChange = this.MoveDown();
 	this.MergeDown();
-	this.MoveDown();
+	anyChange |= this.MoveDown();
+	
+	if(anyChange)
+	{
+		this.fillBoard();
+	}
+	
+	if(this.IsBlocked())
+	{
+		alert('looossseer');	
+	}
 };
 
 /**
  * Move object to up to fill any hole but no Merge
  */
 Board.prototype.MoveUp = function() {
+	var anyChange = false;
+	
 	for(var y = 0 ; y < 4; y++)
 	{
 		for(var currentXIndex = 0; currentXIndex < 3; currentXIndex++)
@@ -193,16 +263,23 @@ Board.prototype.MoveUp = function() {
 				{
 					this.setCellValue([currentXIndex, y], this.getCellValue([nonEmptyXIndex, y]));
 					this.clearCellValue([nonEmptyXIndex, y]);
+					
+					anyChange = true;
 				}
 			}
 		}
 	}
+	
+	return anyChange;
 };
 
 /**
  * Move object to up to fill any hole but no Merge
  */
 Board.prototype.MoveDown = function() {
+	
+	var anyChange = false;
+	
 	for(var y = 0 ; y < 4; y++)
 	{
 		for(var currentXIndex = 3; currentXIndex > 0; currentXIndex--)
@@ -221,10 +298,14 @@ Board.prototype.MoveDown = function() {
 				{
 					this.setCellValue([currentXIndex, y], this.getCellValue([nonEmptyXIndex, y]));
 					this.clearCellValue([nonEmptyXIndex, y]);
+					
+					anyChange = true;
 				}
 			}
 		}
 	}
+	
+	return anyChange;
 };
 
 
@@ -232,6 +313,9 @@ Board.prototype.MoveDown = function() {
  * Move object to right to fill any hole but no Merge
  */
 Board.prototype.MoveRight = function() {
+	
+	var anyChange = false;
+	
 	for(var x = 0 ; x < 4; x++)
 	{
 		for(var currentYIndex = 3; currentYIndex > 0; currentYIndex--)
@@ -250,8 +334,12 @@ Board.prototype.MoveRight = function() {
 				{
 					this.setCellValue([x,currentYIndex], this.getCellValue([x,nonEmptyYIndex]));
 					this.clearCellValue([x,nonEmptyYIndex]);
+					
+					anyChange = true;
 				}
 			}
 		}
 	}
+	
+	return true;
 };
