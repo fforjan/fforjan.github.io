@@ -1,6 +1,7 @@
 
 function Board ()  {
-    this.Content = [['', '', '', ''], ['', '', '', ''], ['', '', '', ''], ['', '', '', '']]
+    this.Content = [['', '', '', ''], ['', '', '', ''], ['', '', '', ''], ['', '', '', '']];
+    this.LastInserted = [-1, -1];
 }
 
 Board.prototype.getCell = function()
@@ -39,8 +40,8 @@ Board.prototype.getEmptyCell = function () {
 };
 
 Board.prototype.fillBoard = function () {
-    var cell = this.getEmptyCell();
-    this.setCellValue(cell, Math.random() > 0.75 ? 4 : 2);
+    this.LastInserted = this.getEmptyCell();
+    this.setCellValue(this.LastInserted, Math.random() > 0.75 ? 4 : 2);
 };
 
 Board.prototype.IsBlocked = function()
@@ -173,6 +174,7 @@ Board.prototype.MergeRight = function() {
 
 Board.prototype.DoLeft  = function()
 {
+	this.LastInserted = [-1, -1]
 	var anyChange = this.MoveLeft();
 	this.MergeLeft();
 	anyChange |= this.MoveLeft();
@@ -190,6 +192,7 @@ Board.prototype.DoLeft  = function()
 
 Board.prototype.DoRight  = function()
 {
+	this.LastInserted = [-1, -1]
 	var anyChange = this.MoveRight();
 	this.MergeRight();
 	anyChange |= this.MoveRight();
@@ -207,6 +210,7 @@ Board.prototype.DoRight  = function()
 
 Board.prototype.DoUp  = function()
 {
+	this.LastInserted = [-1, -1]
 	var anyChange = this.MoveUp();
 	this.MergeUp();
 	 anyChange |= this.MoveUp();
@@ -224,6 +228,7 @@ Board.prototype.DoUp  = function()
 
 Board.prototype.DoDown  = function()
 {
+	this.LastInserted = [-1, -1]
 	var anyChange = this.MoveDown();
 	this.MergeDown();
 	anyChange |= this.MoveDown();
