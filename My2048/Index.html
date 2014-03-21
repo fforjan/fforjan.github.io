@@ -7,8 +7,35 @@
 </head>
 <body>
     <script src="Board.js"> </script>
+    <table id="TableUI" style="text-align: center;">
+        <tr>
+            <td />
+            <td />
+            <td />
+            <td />
+        </tr>
+        <tr>
+            <td />
+            <td />
+            <td />
+            <td />
+        </tr>
+        <tr>
+            <td />
+            <td />
+            <td />
+            <td />
+        </tr>
+        <tr>
+            <td />
+            <td />
+            <td />
+            <td />
+        </tr>
+    </table>
+
     <script>
-        var board = new Board();
+          var board = new Board();
         board.updateUI = function () {
             var table = document.getElementById('TableUI');
             for (var r = 0, n = table.rows.length; r < n; r++) {
@@ -45,36 +72,7 @@
 
             board.updateUI();
         };
-    </script>
-
-    <table id="TableUI" style="text-align: center;">
-        <tr>
-            <td />
-            <td />
-            <td />
-            <td />
-        </tr>
-        <tr>
-            <td />
-            <td />
-            <td />
-            <td />
-        </tr>
-        <tr>
-            <td />
-            <td />
-            <td />
-            <td />
-        </tr>
-        <tr>
-            <td />
-            <td />
-            <td />
-            <td />
-        </tr>
-    </table>
-
-    <script>
+        
         board.fillBoard();
         board.updateUI();
 
