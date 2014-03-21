@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- https://github.com/dmytroyarmak/backbone-contact-manager/releases/tag/step-5 -->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -32,7 +33,10 @@
       </div>
     </div>
     <script>
-        var contacts = new Manager2048.Collections.Games([
+        var contacts = new Manager2048.Collections.Games
+            
+        $(function() {
+            Manager2048.start([
             {
                 id: 'Table',
                 name : 'HTML Table with CSS'
@@ -46,14 +50,7 @@
                 name : 'Canvas 2D API'
             },
         ]);
-            
-        var bob = new Manager2048.Models.GameType({name: 'Bob'})
-        var bobView = new Manager2048.Views.Game({model: bob})
-            
-        bobView.render()
-        bobView.$el
-            
-        $('body').append(bobView.$el)
+        }); 
     </script>      
   </body>
 </html>
