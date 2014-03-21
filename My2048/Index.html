@@ -34,6 +34,17 @@
 
             board.updateUI();
         };
+
+        board.processSwipe = function (swipeDirection) {
+            switch (swipeDirection) {
+                case SwipeDirection.Left: this.DoLeft(); break;
+                case SwipeDirection.Up: this.DoUp(); break;
+                case SwipeDirection.Right: this.DoRight(); break;
+                case SwipeDirection.Down: this.DoDown(); break;
+            }
+
+            board.updateUI();
+        };
     </script>
 
     <table id="TableUI" style="text-align: center;">
@@ -68,6 +79,7 @@
         board.updateUI();
 
         document.addEventListener("keydown", function (event) { board.processKey(event); }, false);
+        addSwipeListener(document, function (event) { board.processSwipe(event); });
     </script>
 </body>
 </html>

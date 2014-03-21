@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "My2048", "My2048", "{F9627A
 		My2048\Board.css = My2048\Board.css
 		My2048\Board.js = My2048\Board.js
 		My2048\Index.html = My2048\Index.html
+		My2048\Swipe.js = My2048\Swipe.js
 	EndProjectSection
 EndProject
 Global
