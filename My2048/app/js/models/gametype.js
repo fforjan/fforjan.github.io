@@ -2,6 +2,7 @@
 
 Manager2048.Models.GameType = Backbone.Model.extend({
     defaults: {
+        id:null,
         name: null,
         screenshot: null
     },

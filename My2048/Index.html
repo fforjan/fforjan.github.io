@@ -16,6 +16,7 @@
       
     <script src="app/js/app.js"></script>
     <script src="app/js/models/gametype.js"></script>
+    <script src="app/js/collections/games.js"></script>
           
     <header class="bs-header">
       <div class="container">
@@ -29,7 +30,21 @@
         </div>
       </div>
     </div>
-          
-      
+    <script>
+        var contacts = new Manager2048.Collections.Games([
+            {
+                id: 'Table',
+                name : 'HTML Table with CSS'
+            },
+            {
+                id: 'WebGL',  
+                name : 'WebGL'
+            },        
+            {
+                id: 'Canvas',  
+                name : 'Canvas 2D API'
+            },
+        ])  
+    </script>      
   </body>
 </html>
