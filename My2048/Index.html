@@ -1,83 +1,25 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>2048 FF</title>
-    <link rel="stylesheet" type="text/css" href="Board.css">
-
-</head>
-<body>
-    <script src="Board.js"> </script>
-    <table id="TableUI" style="text-align: center;">
-        <tr>
-            <td />
-            <td />
-            <td />
-            <td />
-        </tr>
-        <tr>
-            <td />
-            <td />
-            <td />
-            <td />
-        </tr>
-        <tr>
-            <td />
-            <td />
-            <td />
-            <td />
-        </tr>
-        <tr>
-            <td />
-            <td />
-            <td />
-            <td />
-        </tr>
-    </table>
-
-    <script>
-          var board = new Board();
-        board.updateUI = function () {
-            var table = document.getElementById('TableUI');
-            for (var r = 0, n = table.rows.length; r < n; r++) {
-                for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
-                    table.rows[r].cells[c].innerHTML = this.getCellValue([r, c]);
-
-                    table.rows[r].cells[c].className = '_' + this.getCellValue([r, c]);
-
-                    if (this.LastInserted[0] == r && this.LastInserted[1] == c) {
-                        table.rows[r].cells[c].className += ' inserted';
-                    }
-                }
-            }
-        };
-
-        board.processKey = function (keyEvent) {
-            switch (keyEvent.keyCode) {
-                case 37: this.DoLeft(); break;
-                case 38: this.DoUp(); break;
-                case 39: this.DoRight(); break;
-                case 40: this.DoDown(); break;
-            }
-
-            board.updateUI();
-        };
-
-        board.processSwipe = function (swipeDirection) {
-            switch (swipeDirection) {
-                case SwipeDirection.Left: this.DoLeft(); break;
-                case SwipeDirection.Up: this.DoUp(); break;
-                case SwipeDirection.Right: this.DoRight(); break;
-                case SwipeDirection.Down: this.DoDown(); break;
-            }
-
-            board.updateUI();
-        };
-        
-        board.fillBoard();
-        board.updateUI();
-
-        document.addEventListener("keydown", function (event) { board.processKey(event); }, false);
-        addSwipeListener(document, function (event) { board.processSwipe(event); });
-    </script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Manager</title>
+    <link href="vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="app/css/main.css" rel="stylesheet">
+  </head>
+  <body>
+    <header class="bs-header">
+      <div class="container">
+        <h1>2048</h1>
+        <p>Simple 2048 clone as a backbone application</p>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
