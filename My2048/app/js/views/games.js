@@ -3,7 +3,7 @@ Manager2048.Views.Games = Backbone.View.extend({
 
     renderOne: function(game) {
         var itemView = new Manager2048.Views.Game({model: game});
-        this.$('.game-container').append(itemView.render().$el);
+        this.$('.games-container').append(itemView.render().$el);
     },
     
     render: function() {
