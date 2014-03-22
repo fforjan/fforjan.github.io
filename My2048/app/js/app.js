@@ -4,9 +4,16 @@ window.Manager2048 = {
     Models: {},
     Collections: {},
     Views: {},
-    start: function () {
+    start: function (data) {
         "use strict";
-        window.alert('2048 Manager started!');
+        
+        var games = new Manager2048.Collections.Games(data.games);
+        
+        var contactsView = new Manager2048.Views.Games({
+            collection: games
+        });
+        
+        $('.main-container').html(contactsView.render().$el);
     }
 };
 
