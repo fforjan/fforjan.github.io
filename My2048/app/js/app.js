@@ -4,16 +4,47 @@ window.Manager2048 = {
     Models: {},
     Collections: {},
     Views: {},
+    
+    startRouter : function (games) {
+        "use strict";
+        var router = new Manager2048.Router();
+
+        router.on('route:home', function () {
+            window.alert('Home');
+        });
+
+        router.on('route:showGames', function () {
+            window.alert('Show Games');
+        });
+
+        router.on('route:startGame', function (id) {
+            window.alert('Start Game');
+        });
+
+        Backbone.history.start();
+
+        router.on('route:home', function () {
+            router.navigate('games', {
+                trigger: true,
+                replace: true
+            });
+        });
+        
+        router.on('route:showGames', function () {
+            var gamesView = new Manager2048.Views.Games({
+                collection: games
+            });
+        
+            $('.main-container').html(gamesView.render().$el);
+        });
+    },
+    
     start: function (data) {
         "use strict";
         
         var games = new Manager2048.Collections.Games(data.games);
         
-        var contactsView = new Manager2048.Views.Games({
-            collection: games
-        });
-        
-        $('.main-container').html(contactsView.render().$el);
+        this.startRouter(games);
     }
 };
 
