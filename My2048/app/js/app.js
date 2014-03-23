@@ -4,6 +4,7 @@ window.Manager2048 = {
     Models: {},
     Collections: {},
     Views: {},
+    Board: new Board(),
     
     startRouter : function (games) {
         "use strict";
@@ -25,7 +26,19 @@ window.Manager2048 = {
         });
         
         router.on('route:startGame', function (id) {
-            window.alert('Start Game : ' + id);
+            
+            var game = games.get(id);
+            var gameView;
+            
+            if (game && game.id === 0) {
+                gameView = new Manager2048.Views.GameTable({
+                    model: game
+                });
+
+                $('.main-container').html(gameView.render().$el);
+            } else {
+                router.navigate('games', true);
+            }
         });
 
         Backbone.history.start();
