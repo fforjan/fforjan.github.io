@@ -8,21 +8,7 @@ window.Manager2048 = {
     startRouter : function (games) {
         "use strict";
         var router = new Manager2048.Router();
-
-        router.on('route:home', function () {
-            window.alert('Home');
-        });
-
-        router.on('route:showGames', function () {
-            window.alert('Show Games');
-        });
-
-        router.on('route:startGame', function (id) {
-            window.alert('Start Game');
-        });
-
-        Backbone.history.start();
-
+             
         router.on('route:home', function () {
             router.navigate('games', {
                 trigger: true,
@@ -37,6 +23,12 @@ window.Manager2048 = {
         
             $('.main-container').html(gamesView.render().$el);
         });
+        
+        router.on('route:startGame', function (id) {
+            window.alert('Start Game');
+        });
+
+        Backbone.history.start();
     },
     
     start: function (data) {
