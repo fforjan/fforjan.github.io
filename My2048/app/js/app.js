@@ -25,7 +25,7 @@ window.Manager2048 = {
         });
         
         router.on('route:startGame', function (id) {
-            window.alert('Start Game');
+            window.alert('Start Game : ' + id);
         });
 
         Backbone.history.start();
