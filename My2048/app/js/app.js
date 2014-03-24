@@ -30,8 +30,14 @@ window.Manager2048 = {
             var game = games.get(id);
             var gameView;
             
-            if (game && game.id === 0) {
+            if (game && game.id === 'table') {
                 gameView = new Manager2048.Views.GameTable({
+                    model: game
+                });
+
+                $('.main-container').html(gameView.render().$el);
+            } else if (game && game.id === 'canvas') {
+                gameView = new Manager2048.Views.GameCanvas({
                     model: game
                 });
 
@@ -39,7 +45,7 @@ window.Manager2048 = {
             } else {
                 router.navigate('games', true);
             }
-        });
+        });           
 
         Backbone.history.start();
     },

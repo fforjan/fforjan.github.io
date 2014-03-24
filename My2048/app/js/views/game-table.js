@@ -10,7 +10,7 @@ Manager2048.Views.GameTable = Backbone.View.extend({
         var instanceTemplate = this.$el.append(html)[0];
         var table = instanceTemplate.getElementsByTagName('table')[0];
         
-        Manager2048.Board.updateUI = function () {            
+        Manager2048.Board.updateUI = function () {
             var r, c, n, m;
             
             for (r = 0, n = table.rows.length; r < n; r++) {
