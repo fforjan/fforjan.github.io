@@ -1,6 +1,3 @@
-/**
- * Board constructor
- */
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
 
 function Board() {
@@ -171,7 +168,6 @@ Board.prototype.MergeRight = function () {
         }
     }
 };
-
 Board.prototype.DoLeft = function () {
     "use strict";
     this.LastInserted = [-1, -1];
