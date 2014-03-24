@@ -2,74 +2,83 @@
 
 Manager2048.Views.GameTable = Backbone.View.extend({
     template: _.template($('#tpl-game-table').html()),
+    table: {},
     
     render: function () {
         "use strict";
         
         var html = this.template();
-        var instanceTemplate = this.$el.append(html)[0];
-        var table = instanceTemplate.getElementsByTagName('table')[0];
-        
-        Manager2048.Board.updateUI = function () {
-            var r, c, n, m;
-            
-            for (r = 0, n = table.rows.length; r < n; r++) {
-                for (c = 0, m = table.rows[r].cells.length; c < m; c++) {
-                    table.rows[r].cells[c].innerHTML = this.getCellValue([r, c]);
+        this.$el.append(html);
+                                                                           
+        return this;
+    },
+    
+    updateUI : function () {
+        "use strict";
+        var r, c, n, m;
 
-                    table.rows[r].cells[c].className = '_' + this.getCellValue([r, c]);
+        for (r = 0, n = this.table.rows.length; r < n; r++) {
+            for (c = 0, m = this.table.rows[r].cells.length; c < m; c++) {
+                this.table.rows[r].cells[c].innerHTML = Manager2048.Board.getCellValue([r, c]);
 
-                    if (this.LastInserted[0] === r && this.LastInserted[1] === c) {
-                        table.rows[r].cells[c].className += ' inserted';
-                    }
+                this.table.rows[r].cells[c].className = '_' + Manager2048.Board.getCellValue([r, c]);
+
+                if (Manager2048.Board.LastInserted[0] === r && Manager2048.Board.LastInserted[1] === c) {
+                    this.table.rows[r].cells[c].className += ' inserted';
                 }
             }
-        };
+        }
+    },
+    
+    processKey: function (keyEvent) {
+        "use strict";
+        switch (keyEvent.keyCode) {
+        case 37:
+            Manager2048.Board.DoLeft();
+            break;
+        case 38:
+            Manager2048.Board.DoUp();
+            break;
+        case 39:
+            Manager2048.Board.DoRight();
+            break;
+        case 40:
+            Manager2048.Board.DoDown();
+            break;
+        }
 
-        Manager2048.Board.processKey = function (keyEvent) {
-            switch (keyEvent.keyCode) {
-            case 37:
-                this.DoLeft();
-                break;
-            case 38:
-                this.DoUp();
-                break;
-            case 39:
-                this.DoRight();
-                break;
-            case 40:
-                this.DoDown();
-                break;
-            }
+        this.updateUI();
+    },
 
-            Manager2048.Board.updateUI();
-        };
+    processSwipe: function (swipeDirection) {
+        "use strict";
+        switch (swipeDirection) {
+        case SwipeDirection.Left:
+            Manager2048.Board.DoLeft();
+            break;
+        case SwipeDirection.Up:
+            Manager2048.Board.DoUp();
+            break;
+        case SwipeDirection.Right:
+            Manager2048.Board.DoRight();
+            break;
+        case SwipeDirection.Down:
+            Manager2048.Board.DoDown();
+            break;
+        }
 
-        Manager2048.Board.processSwipe = function (swipeDirection) {
-            switch (swipeDirection) {
-            case SwipeDirection.Left:
-                this.DoLeft();
-                break;
-            case SwipeDirection.Up:
-                this.DoUp();
-                break;
-            case SwipeDirection.Right:
-                this.DoRight();
-                break;
-            case SwipeDirection.Down:
-                this.DoDown();
-                break;
-            }
-
-            Manager2048.Board.updateUI();
-        };
-                        
+        this.updateUI();
+    },
+    rendered: function () {
+        "use strict";
+        
+        this.table = document.getElementById("TableUI");
+        
         Manager2048.Board.fillBoard();
-        Manager2048.Board.updateUI();
-
-        document.addEventListener("keydown", function (event) { Manager2048.Board.processKey(event); }, false);
-        addSwipeListener(document, function (event) { Manager2048.Board.processSwipe(event); });
-                
-        return this;
+        this.updateUI();
+        
+        var _this = this;
+        document.addEventListener("keydown", function (event) { _this.processKey(event); }, false);
+        addSwipeListener(document, function (event) {_this.processSwipe(event); });
     }
 });

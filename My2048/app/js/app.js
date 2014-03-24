@@ -36,16 +36,20 @@ window.Manager2048 = {
                 });
 
                 $('.main-container').html(gameView.render().$el);
+                
+                gameView.rendered();
             } else if (game && game.id === 'canvas') {
                 gameView = new Manager2048.Views.GameCanvas({
                     model: game
                 });
 
                 $('.main-container').html(gameView.render().$el);
+                
+                gameView.rendered();
             } else {
                 router.navigate('games', true);
             }
-        });           
+        });
 
         Backbone.history.start();
     },

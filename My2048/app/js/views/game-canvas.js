@@ -2,12 +2,22 @@
 
 Manager2048.Views.GameCanvas = Backbone.View.extend({
     template: _.template($('#tpl-game-canvas').html()),
+    stage : {},
     
     render: function () {
         "use strict";
         
-        var stage = new Kinetic.Stage({
-            container: 'container',
+        var html = this.template();
+        this.$el.append(html);
+        
+        return this;
+    },
+    
+    rendered: function () {
+        "use strict";
+        
+        this.stage = new Kinetic.Stage({
+            container: 'kinetic',
             width: 578,
             height: 200
         });
@@ -28,9 +38,8 @@ Manager2048.Views.GameCanvas = Backbone.View.extend({
         layer.add(rect);
 
         // add the layer to the stage
-        stage.add(layer);
-        
-        Manager2048.KineticStage =  stage;
+        this.stage.add(layer);
+                
         return this;
     }
 });
