@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="AFaireApplication">
 
 <head>
     <meta charset="utf-8" />
@@ -10,62 +10,15 @@
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <script src="vendor/angular/angular.min.js"></script>
+     <script src="app/js/AFaireApplication.js"></script>
 </head>
 
-<body>
+<body ng-controller="AFaireController">
     <ul>
-        <li>
-            <a href="#">
-                <h2 contenteditable="true">Title #1</h2>
-                <p contenteditable="true">Text Content #1</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <h2 contenteditable="true">Title #2</h2>
-                <p contenteditable="true">Text Content #2</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <h2 contenteditable="true">Title #3</h2>
-                <p contenteditable="true">Text Content #3</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <h2 contenteditable="true">Title #4</h2>
-                <p contenteditable="true">Text Content #4</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <h2 contenteditable="true">Title #5</h2>
-                <p contenteditable="true">Text Content #5</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <h2 contenteditable="true">Title #6</h2>
-                <p contenteditable="true">Text Content #6</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <h2 contenteditable="true">Title #2</h2>
-                <p contenteditable="true">Text Content #2</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <h2 contenteditable="true">Title #7</h2>
-                <p contenteditable="true">Text Content #7</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <h2 contenteditable="true">Title #8</h2>
-                <p contenteditable="true">Text Content #8</p>
+        <li ng-repeat="todo in todos">
+             <a href="#">
+                <h2 contenteditable="true">{{todo.name}}</h2>
+                <p contenteditable="true">{{todo.text}}</p>
             </a>
         </li>
     </ul>
